@@ -9,10 +9,13 @@ authors:
   - Billy Sperlich
   - Peter Düking
 date: '2026-01-01'
-doi: '10.3389/FEDUC.2026.1765699'
 publication_types: ['journal-article']
 publication: '*Frontiers in Education*'
 publication_short: '*Front Educ*'
 abstract: ''
 featured: false
+hugoblox:
+  ids:
+    doi: '10.3389/FEDUC.2026.1765699'
+
 ---
