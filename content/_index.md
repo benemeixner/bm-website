@@ -146,7 +146,7 @@ sections:
 
         I'm always happy to hear from potential collaborators, students, or
         journalists working on topics related to exercise physiology,
-        performance diagnostics, or sport pedagogy.
+        performance diagnostics, or ball games and physical education.
     design:
       columns: '1'
 ---
