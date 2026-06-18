@@ -1,0 +1,97 @@
+schema: hugoblox/author/v1
+slug: me
+is_owner: true
+name:
+  display: Dr. Benedikt Meixner
+  given: Benedikt
+  family: Meixner
+  alternate: ''
+  pronunciation: ''
+  pronouns: '' # TODO: add if you'd like, e.g. he/him
+postnominals:
+  - PhD
+status:
+  icon:  # feel free to swap for something else, e.g. 🔬 🏃 🩻
+role: Sports Science & Exercise Physiology
+bio: |
+    I am a sports scientist interested in exercise physiology, 
+    human performance, and the bioenergetics of exercise. My 
+    research focuses on lactate dynamics, glycolytic metabolism, 
+    and concepts of performance limitation across sprint and endurance 
+    contexts. To investigate these topics, I use approaches such as 
+    cardiopulmonary exercise testing, lactate profiling, and near-infrared 
+    spectroscopy. I am also interested in sex differences, body 
+    composition and scaling, as well as  the use of 
+    AI tools in research and sport education.
+
+# TODO: keep this list current as your affiliation changes
+affiliations:
+  - name: FAU Erlangen-Nürnberg, Department of Sport Science
+    url: https://www.sport.fau.de/person/benedikt-meixner/
+  - name: Julius-Maximilians-Universität Würzburg, Chair of Integrative and Experimental Training and Movement Science
+    url: https://www.sportwissenschaft.uni-wuerzburg.de/team/meixnerbenedikt/
+
+links:
+  - icon: envelope
+    url: mailto:benedikt.meixner@fau.de # TODO: swap for forwarding address once set up
+    label: Email
+  - icon: brands/bluesky
+    url: https://bsky.app/profile/benemeixner.bsky.social
+    label: Bluesky
+  - icon: academicons/orcid
+    url: https://orcid.org/0000-0001-7044-9426
+    label: ORCID
+  - icon: academicons/google-scholar
+    url: https://scholar.google.com/citations?user=T3OFN84AAAAJ
+    label: Google Scholar
+  - icon: academicons/researchgate
+    url: https://www.researchgate.net/profile/Benedikt-Meixner
+    label: ResearchGate
+
+
+interests:
+  - Exercise physiology & human performance
+  - Bioenergetics of exercise
+  - Lactate dynamics & glycolytic metabolism
+  - Concepts of performance limitation
+  - Modelling of sport performance
+  - Sex differences, body composition & scaling
+  - Sport pedagogy & teacher education
+
+# TODO: fill in/adjust your education history
+education:
+  - degree: PhD, Sport Science # TODO: confirm exact title/field
+    institution: 'University of Wuerzburg' # TODO
+    start: '' # e.g. 2018-10-01
+    end: '2025' # e.g. 2025-09-30
+    summary: ''
+  - degree: State Exam, Sport Science
+    institution: 'University of Erlangen'
+    start: ''
+    end: '2019'
+  - degree: MA German as Foreign Language
+    institution: 'University of Bamberg'
+    start: ''
+    end: '2017'
+  - degree: State Exam, English & Geography
+    institution: 'University of Bamberg'
+    start:
+    end: '2015'
+
+
+# TODO: adjust start dates / wording as needed
+experience:
+  - role: Research Associate
+    org: Julius-Maximilians-Universität Würzburg — Chair of Integrative and Experimental Training and Movement Science (Sperlich Lab)
+    start: '2024-12-01' # TODO: adjust
+    summary: |
+      Research on exercise physiology, focusing on lactate dynamics,
+      NIRS/CPET-based performance diagnostics, and performance repeatability
+      across endurance and high-intensity sports.
+  - role: Lecturer
+    org: FAU Erlangen-Nürnberg — Department of Sport Science
+    start: '2022-09-15' # TODO: adjust
+    summary: |
+      Teaching in sport and movement science, including statistics for sport
+      science students, with a focus on Lehramt Sport (teacher training).
+

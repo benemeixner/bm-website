@@ -1,0 +1,57 @@
+name: Sync Publications From ORCID
+
+# Full pipeline: ORCID → BibTeX → Markdown pages → site rebuild.
+# Runs automatically every Monday at 06:00 UTC, or manually from Actions tab.
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-orcid-publications
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    if: github.repository_owner != 'HugoBlox'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install requests wordcloud pillow pyyaml "academic>=0.10.0"
+
+      - name: Sync ORCID → BibTeX
+        run: python3 scripts/sync_orcid_publications.py
+
+      - name: Clear existing publication pages
+        run: rm -rf content/publications/
+
+      - name: Import BibTeX → Markdown pages
+        run: academic import publications.bib content/publications/ --compact --verbose
+
+      - name: Apply featured flags
+        run: python3 scripts/apply_featured.py
+
+      - name: Commit all changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add publications.bib bib/publications-orcid.bib static/media/wordcloud.png content/publications/
+          if git diff --cached --quiet; then
+            echo "No changes detected."
+          else
+            git commit -m "chore(publications): sync from ORCID/Crossref"
+            git push
+          fi

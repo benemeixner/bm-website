@@ -1,0 +1,153 @@
+/*
+ * benediktmeixner.com — custom overrides
+ *
+ * Primary palette: indigo (serious, dark blue)
+ * Accent: orange — used for highlights, hover states, and outreach/media tags
+ *
+ * To change the accent, find/replace the two hex values:
+ *   #ea580c  (orange-600, main accent)
+ *   #fff7ed  (orange-50,  light accent background)
+ */
+
+/* ── Compact layout ── */
+
+/* Reduce section vertical padding from 6rem → 1.5rem */
+:root {
+  --hb-spacing-section: 1.5rem;
+}
+
+/* Tighten prose list spacing */
+.prose li {
+  margin-top: 0.15rem !important;
+  margin-bottom: 0.15rem !important;
+}
+.prose ul, .prose ol {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Content-collection headings: match the compact grey uppercase style */
+.blox-_ .flex.flex-col.items-center > div[class*="text-3xl"] {
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  color: #9ca3af !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Hide entire hbb-section when content-collection has no items */
+.hbb-section:has(.hbx-empty-collection) {
+  display: none !important;
+}
+
+/* Remove top padding on the very first section so it sits close to the navbar */
+.hbb-section:first-of-type {
+  padding-top: 0 !important;
+}
+
+/* The bio block has hardcoded xl:py-32 (8rem!) — override to something tight */
+.resume-biography {
+  padding-top: 0.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Bio sub-sections (bio text, education, interests) have mb-12/mb-16 gaps — tighten */
+.resume-biography .mb-12 {
+  margin-bottom: 1.5rem !important;
+}
+.resume-biography .mb-16 {
+  margin-bottom: 2rem !important;
+}
+
+/* Section heading icon + title rows have mb-8 — reduce */
+.resume-biography .mb-8 {
+  margin-bottom: 1rem !important;
+}
+
+/* Left column internal space-y-6/space-y-8 — tighten */
+.resume-biography .space-y-6 > * + * {
+  margin-top: 1rem !important;
+}
+.resume-biography .space-y-8 > * + * {
+  margin-top: 1.25rem !important;
+}
+
+/* ── Typography: lighter weight, smaller sizes ── */
+
+/* Kill heavy font weights site-wide */
+h1, h2, h3, h4, h5, h6,
+.font-black, .font-extrabold, .font-bold {
+  font-weight: 400 !important;
+}
+.font-semibold {
+  font-weight: 400 !important;
+}
+
+/* Name in bio — tone down from "font-black" massive size */
+.resume-biography h1 {
+  font-size: 1.75rem !important;
+  font-weight: 400 !important;
+}
+
+/* Role subtitle */
+.resume-biography .text-2xl {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+/* Section headings (Research, Publications, etc.) */
+.section-heading {
+  font-size: 1.1rem !important;
+  font-weight: 400 !important;
+}
+h2.section-heading, h1.section-heading {
+  font-size: 1.1rem !important;
+}
+
+/* Bio sub-section headings (About, Education, Interests) */
+.resume-biography h2,
+.resume-biography h3 {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+/* Body text slightly smaller */
+body {
+  font-size: 0.9rem;
+}
+.prose {
+  font-size: 0.9rem !important;
+}
+
+/* Tag chips / interest pills — orange accent */
+.badge, .tag {
+  background-color: #fff7ed !important;
+  color: #c2410c !important;
+  border-color: #fed7aa !important;
+}
+
+/* Publication type labels */
+.pub-type-label {
+  background-color: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+/* Active nav link underline — orange instead of indigo */
+.navbar .active > a {
+  border-bottom-color: #ea580c !important;
+  color: #ea580c !important;
+}
+
+/* Social/link icon buttons hover — orange */
+.social-links a:hover,
+.author-links a:hover {
+  color: #ea580c !important;
+}
+
+/* Section divider accent line under titles — keep indigo for main, orange for outreach section */
+#outreach .section-heading::after,
+#talks .section-heading::after {
+  background-color: #ea580c;
+}

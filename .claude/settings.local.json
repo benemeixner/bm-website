@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(curl -s http://localhost:1313/)",
+      "Bash(curl -s \"http://localhost:1313/css/custom.min.37114a66457788bab6d6a3884709da9e593ee5d5118e2ab1cbd8dde765d77f26.css\")",
+      "Bash(ls /Users/aq35amuh/Library/Caches/hugo_cache/modules/filecache/modules/pkg/mod/github.com/\\\\!hugo\\\\!blox/kit/modules/blox@v0.0.0-20260527025321-61f41d3667f1/layouts/_partials/views/)",
+      "Bash(pkill -f \"hugo server\")",
+      "Bash(PATH=/usr/local/go/bin:__TRACKED_VAR__ npx pnpm@10.14.0 exec hugo server --port 1313 --bind 0.0.0.0)",
+      "Read(//tmp/**)",
+      "Bash(pkill -f \"hugo server\" 2>/dev/null; sleep 1; PATH=\"/usr/local/go/bin:$PATH\" npx pnpm@10.14.0 exec hugo server --port 1313 --bind 0.0.0.0 > /tmp/hugo.log 2>&1 & *)",
+      "Bash(PATH=/usr/local/go/bin:__TRACKED_VAR__ npx pnpm@10.14.0 exec hugo server --port 1313 --bind 0.0.0.0 --disableFastRender)"
+    ]
+  }
+}

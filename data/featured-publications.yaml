@@ -1,0 +1,35 @@
+# Publication cite keys that appear in the Featured Publications section.
+# Each key corresponds to a folder under content/publications/.
+# The sync workflow applies featured: true and the summary automatically.
+featured:
+  - key: meixner-2025-zone
+    summary: >-
+      Compares individual variability across common Zone 2 intensity definitions
+      (lactate threshold, ventilatory threshold, fat oxidation peak, etc.) in trained
+      athletes, showing that the boundaries vary substantially depending on which
+      criterion is used.
+
+  - key: meixner-2024-relationship
+    summary: >-
+      Examines how peak capillary lactate accumulation and body composition jointly
+      determine the mechanical energy equivalent of lactate (EqLa) during maximal
+      sprint cycling, with implications for estimating vLamax from sprint tests.
+
+  - key: meixner-2026-maximal
+    summary: >-
+      Shows that maximal glycolytic flux (vLamax) shifts metabolic thresholds
+      independently of VO₂max, challenging threshold models that focus solely on
+      aerobic capacity and supporting a two-system framework for endurance performance.
+
+  - key: meixner-2026-methods
+    summary: >-
+      Demonstrates that reported sex differences in exercise intensity determination
+      could reflect protocol choices (ramp rate, mode, criteria) rather than true
+      biological differences, urging methodological standardisation in threshold
+      research.
+
+  - key: meixner-2025-durability
+    summary: >-
+      Proposes and distinguishes four related but separable performance concepts —
+      durability, fatigability, repeatability, and resilience — providing a conceptual
+      framework and practical implications for endurance training and racing.

@@ -1,0 +1,36 @@
+# HugoBlox Font Pack
+# https://docs.hugoblox.com
+
+hugoblox:
+  meta:
+    format: "hugoblox-font@1"
+    name: "Academic"
+    vendor: "hugoblox"
+    version: "1.0.0"
+    license: "MIT"
+    style: "sans"
+    description: "Clean sans-serif pairing"
+
+  families:
+    heading: "Inter"
+    body: "Inter"
+    code: "Source Code Pro"
+
+  weights:
+    heading: [300, 400, 600]
+    body: [300, 400]
+    code: [400]
+
+  leading:
+    heading: 1.2
+    body: 1.6
+    code: 1.5
+
+  tracking:
+    heading: "0"
+    body: "0"
+
+  variable:
+    heading: true
+    body: true
+    code: false

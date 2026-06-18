@@ -1,0 +1,28 @@
+{{/* Hugo Blox: Markdown — local override: 1/3 title + 2/3 content layout */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+{{ $title := "" }}
+{{ with index $content "title" }}{{ $title = printf "%v" . | emojify | $page.RenderString }}{{ end }}
+{{ $text := "" }}
+{{ with index $content "text" }}{{ $text = printf "%v" . | emojify | $page.RenderString | safeHTML }}{{ end }}
+
+<div class="hbx-markdown-layout max-w-5xl mx-auto px-6">
+  {{ if and $title $text }}
+  <div class="flex flex-col md:flex-row gap-8 md:gap-12">
+    <div class="md:w-1/3 flex-shrink-0">
+      <div class="hbx-section-title text-gray-400 dark:text-gray-500 text-sm font-medium uppercase tracking-widest pt-1">
+        {{ $title }}
+      </div>
+    </div>
+    <div class="md:w-2/3">
+      <div class="prose prose-slate dark:prose-invert max-w-none">{{ $text }}</div>
+    </div>
+  </div>
+  {{ else if $text }}
+  <div class="prose prose-slate dark:prose-invert max-w-prose mx-auto">{{ $text }}</div>
+  {{ else if $title }}
+  <div class="hbx-section-title text-gray-400 dark:text-gray-500 text-sm font-medium uppercase tracking-widest">{{ $title }}</div>
+  {{ end }}
+</div>
