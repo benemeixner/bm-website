@@ -1,7 +1,6 @@
 {{ $item := .item }}
 {{ $date_value := $item.Params.event_start | default $item.Date }}
 {{ $date_fmt := (time $date_value).Format "Jan 2006" }}
-{{ $has_attachments := partial "functions/has_attachments" $item }}
 {{ $pub := partial "functions/resolve_publication.html" $item }}
 
 {{ $link := $item.RelPermalink }}
@@ -22,9 +21,4 @@
   <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">{{ . }}</p>
   {{ end }}{{ end }}
 
-  {{ if $has_attachments }}
-  <div class="flex flex-wrap space-x-3">
-    {{ partial "page_links" (dict "page" $item "is_list" 1) }}
-  </div>
-  {{ end }}
 </div>
