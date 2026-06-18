@@ -39,7 +39,7 @@ sections:
       title: 'Research'
       subtitle: ''
       text: |-
-        ![Research wordcloud](/media/wordcloud.png)
+        ![Research wordcloud](media/wordcloud.png)
 
         ### Exercise physiology & human performance
 
