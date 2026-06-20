@@ -15,6 +15,9 @@ main:
   - name: Outreach
     url: /#outreach
     weight: 14
+  - name: Resources
+    url: /resources
+    weight: 15
   - name: Contact
     url: /#contact
-    weight: 15
+    weight: 16
