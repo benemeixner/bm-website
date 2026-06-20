@@ -15,21 +15,28 @@ sections:
 
         ---
 
-        ## Presentations & Slides
-
-        *Nothing here yet — check back after the next talk.*
-
-        ---
-
         ## Apps & Tools
 
-        *Nothing here yet.*
+        **vLamax Simulation** — Interactive tool to explore how the maximal rate of lactate accumulation (vLamax) shapes endurance performance.
+        [Open app](https://benemeixner.shinyapps.io/vlamax-simulation/)
 
         ---
 
         ## Posters
 
-        *Nothing here yet.*
+        **Why Familiarization is Crucial for Testing the Maximal Rate of Lactate Accumulation**
+        Meixner B, Sperlich B — ECSS 2025, July 2025
+        [View on ResearchGate](https://doi.org/10.13140/RG.2.2.34617.68966)
+
+        **The Creatine Paradox: Reduced Alactic Time despite Enhanced Power Output in vLamax-Tests**
+        Meixner B, Stegmaier J, Sperlich B — German Exercise Science and Training Conference 2025, February 2025
+        [View on ResearchGate](https://doi.org/10.13140/RG.2.2.14152.23044)
+
+        ---
+
+        ## Presentations & Slides
+
+        *Coming soon.*
 
     design:
       columns: '1'
