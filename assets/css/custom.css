@@ -151,3 +151,8 @@ body {
 #talks .section-heading::after {
   background-color: #ea580c;
 }
+
+/* Wordcloud: transparent bg adapts to dark mode via invert */
+.dark img[src*="wordcloud"] {
+  filter: invert(1);
+}
