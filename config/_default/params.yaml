@@ -106,7 +106,7 @@ hugoblox:
     style: minimal # minimal | columns | centered
     language_switcher: true
     # Custom footer text (HTML supported)
-    text: ""
+    text: '<a href="/imprint" class="text-xs opacity-50 hover:opacity-100">Imprint</a>'
 
   # ────────────────────────────────────────────────────────────────────────────
   # COPYRIGHT
