@@ -9,7 +9,7 @@ authors:
 - Kobe Vermeire
 - Jan Boone
 date: '2025-01-01'
-publishDate: '2026-06-22T12:21:03.710284Z'
+publishDate: '2026-06-29T11:18:06.962148Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'
