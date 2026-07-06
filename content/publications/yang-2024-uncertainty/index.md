@@ -6,7 +6,7 @@ authors:
 - Benedikt Johannes Meixner
 - Billy Sperlich
 date: '2024-01-01'
-publishDate: '2026-06-29T11:18:06.984716Z'
+publishDate: '2026-07-06T10:54:25.538027Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'
