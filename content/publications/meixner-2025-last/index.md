@@ -6,7 +6,7 @@ authors:
 - Michael J. Joyner
 - Billy Sperlich
 date: '2025-01-01'
-publishDate: '2026-07-13T09:42:16.823557Z'
+publishDate: '2026-07-20T09:29:51.229233Z'
 publication_types:
 - article-journal
 publication: '*Journal of Applied Physiology*'

@@ -8,7 +8,7 @@ authors:
 - Silvia Achtzehn
 - Billy Sperlich
 date: '2026-01-01'
-publishDate: '2026-07-13T09:42:16.801175Z'
+publishDate: '2026-07-20T09:29:51.194198Z'
 publication_types:
 - article-journal
 publication: '*Biology Open*'
