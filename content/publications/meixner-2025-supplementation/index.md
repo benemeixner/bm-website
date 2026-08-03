@@ -10,7 +10,7 @@ authors:
 - Woo-Hwi Yang
 - Billy Sperlich
 date: '2025-01-01'
-publishDate: '2026-07-27T10:04:52.067967Z'
+publishDate: '2026-08-03T10:00:17.431588Z'
 publication_types:
 - article-journal
 publication: '*Current Developments in Nutrition*'
