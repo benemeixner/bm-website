@@ -20,6 +20,9 @@ sections:
         **vLamax Simulation** — Interactive tool to explore how the maximal rate of lactate accumulation (vLamax) shapes endurance performance.
         [Open app](https://benemeixner.shinyapps.io/vlamax-simulation/)
 
+        **Outdoor Training Conditions** — Live safety panel showing heat stress (WBGT), air quality, UV index, thunderstorm risk, wind, and pollen for any location in Europe. Includes a 48-hour risk timeline and a map overlay for regional scanning.
+        [Open tool](/tools/training-conditions.html)
+
         ---
 
         ## Posters
