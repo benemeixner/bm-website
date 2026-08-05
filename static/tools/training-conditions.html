@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outdoor training conditions</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --bg:#EDEFF0;
+    --panel:#FFFFFF;
+    --ink:#1B2430;
+    --ink-soft:#5B6472;
+    --line:#D7DAdd;
+    --sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --green:#3E7A4C;   --green-bg:#E4F0E6;
+    --yellow:#B8862A;  --yellow-bg:#FBF0DD;
+    --orange:#C0602A;  --orange-bg:#FBE5D6;
+    --red:#AE3730;     --red-bg:#F6DEDC;
+    --black:#2A2130;   --black-bg:#E4DEE6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); padding:28px 20px 60px;}
+  .wrap{max-width:920px; margin:0 auto;}
+  header{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:20px; border-bottom:2px solid var(--ink); padding-bottom:14px;}
+  h1{font-size:20px; font-weight:700; letter-spacing:0.02em; margin:0 0 4px;}
+  .sub{font-family:var(--mono); font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em;}
+  .searchbox{display:flex; gap:8px;}
+  input[type=text]{font-family:var(--mono); font-size:13px; padding:9px 10px; border:1.5px solid var(--ink); background:var(--panel); color:var(--ink); width:220px; border-radius:2px;}
+  select{font-family:var(--mono); font-size:12px; padding:8px 6px; border:1.5px solid var(--ink); background:var(--panel); color:var(--ink); border-radius:2px;}
+  button{font-family:var(--sans); font-size:13px; font-weight:600; padding:9px 16px; background:var(--ink); color:#fff; border:1.5px solid var(--ink); cursor:pointer; border-radius:2px;}
+  button:hover{opacity:0.85;}
+  button.ghost{background:var(--panel); color:var(--ink);}
+  button:disabled{opacity:0.5; cursor:default;}
+
+  #map{height:320px; width:100%; border:1.5px solid var(--ink); margin-bottom:8px; filter:grayscale(0.15);}
+  .map-controls{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;}
+  .map-controls-left{display:flex; align-items:center; gap:8px;}
+  .map-hint{font-family:var(--mono); font-size:11px; color:var(--ink-soft); margin-bottom:20px; line-height:1.5;}
+
+  .flagbar{display:flex; align-items:center; gap:18px; padding:18px 20px; margin-bottom:22px; border:2px solid var(--ink); background:var(--panel);}
+  .flag{width:34px; height:24px; flex:none;}
+  .flag-status{flex:1;}
+  .flag-status .label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); margin-bottom:2px;}
+  .flag-status .value{font-size:19px; font-weight:700;}
+  .flag-status .desc{font-size:13px; color:var(--ink-soft); margin-top:2px;}
+  .updated{font-family:var(--mono); font-size:11px; color:var(--ink-soft); text-align:right;}
+
+  .timepanel{background:var(--panel); border:1.5px solid var(--line); padding:14px 18px 18px; margin-bottom:22px;}
+  .timepanel-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;}
+  .timepanel-top .lbl{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft);}
+  .timepanel-top .val{font-size:15px; font-weight:700;}
+  input[type=range]{width:100%; accent-color:var(--ink); height:20px;}
+  .timepanel-buttons{display:flex; gap:8px; margin-top:10px;}
+  .timepanel-buttons button{padding:5px 12px; font-size:12px; font-weight:500;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-bottom:24px;}
+  .card{background:var(--panel); border:1.5px solid var(--line); border-left:5px solid var(--ink); padding:14px 16px;}
+  .card .name{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:6px;}
+  .card .reading{font-family:var(--mono); font-size:26px; font-weight:700; line-height:1;}
+  .card .unit{font-size:13px; font-weight:400; color:var(--ink-soft);}
+  .card .status{font-size:13px; font-weight:600; margin-top:6px; display:inline-block; padding:2px 8px;}
+  .card .note{font-size:12px; color:var(--ink-soft); margin-top:4px; line-height:1.4;}
+
+  .strip-section{margin-bottom:26px;}
+  .strip-title{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:8px; display:flex; justify-content:space-between;}
+  .strip{display:flex; height:52px; border:1.5px solid var(--ink); overflow:hidden; position:relative; cursor:pointer;}
+  .strip-hr{flex:1; position:relative; border-right:1px solid rgba(0,0,0,0.08);}
+  .strip-hr:last-child{border-right:none;}
+  .strip-hr.now{box-shadow:inset 0 0 0 2px var(--ink);}
+  .strip-hr.selected{box-shadow:inset 0 0 0 3px #fff, inset 0 0 0 5px var(--ink);}
+  .strip-hr .tt{position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:9px; color:var(--ink-soft); white-space:nowrap;}
+  .strip-legend{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap; font-family:var(--mono); font-size:10px; color:var(--ink-soft);}
+  .legend-sw{width:10px; height:10px; display:inline-block; margin-right:5px; vertical-align:-1px;}
+
+  footer{font-size:12px; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:14px; line-height:1.6;}
+  .loading, .errbox{font-family:var(--mono); font-size:13px; padding:30px; text-align:center; color:var(--ink-soft);}
+  .errbox{color:var(--red);}
+
+  .g0{background:var(--green-bg); color:var(--green);}
+  .g1{background:var(--yellow-bg); color:var(--yellow);}
+  .g2{background:var(--orange-bg); color:var(--orange);}
+  .g3{background:var(--red-bg); color:var(--red);}
+  .g4{background:var(--black-bg); color:var(--black);}
+  .fill0{background:var(--green);}
+  .fill1{background:var(--yellow);}
+  .fill2{background:var(--orange);}
+  .fill3{background:var(--red);}
+  .fill4{background:var(--black);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Outdoor training conditions</h1>
+      <div class="sub">Live diagnostic panel &mdash; Europe</div>
+    </div>
+    <div class="searchbox">
+      <input type="text" id="locInput" placeholder="City, Europe" value="Hof, Germany">
+      <button id="searchBtn">Load</button>
+    </div>
+  </header>
+
+  <div class="map-controls">
+    <div class="map-controls-left">
+      <select id="gridDensity">
+        <option value="4">Grid: 4&times;4 (coarse, fast)</option>
+        <option value="6" selected>Grid: 6&times;6 (default)</option>
+        <option value="8">Grid: 8&times;8 (fine, more calls)</option>
+      </select>
+      <button id="scanBtn">Scan visible area</button>
+      <button class="ghost" id="clearBtn">Clear overlay</button>
+    </div>
+    <span class="sub" id="scanStatus"></span>
+  </div>
+  <div id="map"></div>
+  <div class="map-hint">Click the map to load a single point, or pan/zoom then <strong>Scan visible area</strong> to color the whole view by overall risk at the currently selected time. Each scan is one batched API call per grid, not one call per cell &mdash; still, larger grids cost more of your daily Open-Meteo quota. Cell color is coarser than the underlying weather models (~1&ndash;2&nbsp;km temp/wind centrally in Europe, ~11&nbsp;km CAMS air quality) &mdash; treat it as indicative, not a point forecast.</div>
+
+  <div id="content">
+    <div class="loading">Fetching live data&hellip;</div>
+  </div>
+
+  <footer>
+    Data: temperature, humidity, wind and CAPE from Open-Meteo (national weather services, includes past observations and forecast); air quality, UV and pollen from Open-Meteo Air Quality API (CAMS-Europe, Copernicus). Heat stress is an estimated outdoor WBGT (Australian simplified formula) &mdash; it omits direct solar radiation load, so on cloudless days true heat stress runs higher than shown. This is a screening tool, not medical advice; individual heat tolerance, acclimatisation, hydration and health conditions all shift real risk. Map tiles &copy; OpenStreetMap contributors.
+  </footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const AQ_BASE = "https://air-quality-api.open-meteo.com/v1/air-quality";
+const FC_BASE = "https://api.open-meteo.com/v1/forecast";
+const GEO_BASE = "https://geocoding-api.open-meteo.com/v1/search";
+const REV_BASE = "https://nominatim.openstreetmap.org/reverse";
+
+function satVaporPressure(t){ return 6.105 * Math.exp(17.27*t/(237.7+t)); }
+function computeWBGT(t, rh){ const pw = (rh/100) * satVaporPressure(t); return 0.567*t + 0.393*pw + 3.94; }
+function classifyWBGT(w){
+  if(w<18) return {sev:0, label:"Low", note:"Comfortable for sustained hard training."};
+  if(w<23) return {sev:1, label:"Moderate", note:"Increase fluid intake; watch pace on long efforts."};
+  if(w<28) return {sev:2, label:"High", note:"Reduce intensity, add breaks, avoid midday hours."};
+  if(w<30) return {sev:3, label:"Very high", note:"Shorten sessions sharply; heat illness risk rises fast."};
+  return {sev:4, label:"Extreme", note:"Postpone or move sessions indoors."};
+}
+function computeWindChill(t, windKmh){
+  if(t>10 || windKmh<4.8) return null;
+  const v16 = Math.pow(windKmh, 0.16);
+  return 13.12 + 0.6215*t - 11.37*v16 + 0.3965*t*v16;
+}
+function classifyWindChill(wc){
+  if(wc===null) return {sev:0, label:"n/a", note:"Not cold/windy enough for wind chill to matter."};
+  if(wc>-10) return {sev:0, label:"Low", note:"Frostbite risk minimal on exposed skin."};
+  if(wc>-25) return {sev:1, label:"Moderate", note:"Cover extremities on long sessions."};
+  if(wc>-35) return {sev:2, label:"High", note:"Frostbite possible in under 30 min exposed."};
+  if(wc>-45) return {sev:3, label:"Very high", note:"Frostbite possible in under 10 min."};
+  return {sev:4, label:"Extreme", note:"Frostbite in minutes. Stay indoors."};
+}
+function classifyEAQI(v){
+  if(v==null) return {sev:0, label:"n/a"};
+  if(v<20) return {sev:0, label:"Good", note:"No precautions needed."};
+  if(v<40) return {sev:1, label:"Fair", note:"Fine for almost everyone."};
+  if(v<60) return {sev:2, label:"Moderate", note:"Sensitive individuals ease off intensity."};
+  if(v<80) return {sev:3, label:"Poor", note:"Cut intensity and duration outdoors."};
+  if(v<100) return {sev:3, label:"Very poor", note:"Shift hard sessions indoors."};
+  return {sev:4, label:"Extremely poor", note:"Avoid outdoor exertion."};
+}
+function classifyUV(v){
+  if(v==null) return {sev:0, label:"n/a"};
+  if(v<3) return {sev:0, label:"Low", note:"No protection required for most."};
+  if(v<6) return {sev:1, label:"Moderate", note:"Sunscreen for sessions over ~45 min."};
+  if(v<8) return {sev:2, label:"High", note:"Sunscreen, sunglasses, seek shade at breaks."};
+  if(v<11) return {sev:3, label:"Very high", note:"Minimise midday exposure, cover up."};
+  return {sev:4, label:"Extreme", note:"Avoid midday sun entirely."};
+}
+function classifyThunder(cape, precipProb){
+  const risk = (cape>=2500 && precipProb>=40) ? 4
+    : (cape>=1000 && precipProb>=30) ? 3
+    : (cape>=500 && precipProb>=20) ? 2
+    : (cape>=250) ? 1 : 0;
+  const labels=["Minimal","Isolated risk","Scattered risk","Elevated risk","High risk"];
+  const notes=["No convective signal.","Watch the sky; low CAPE.","Storm cells possible; have a bail-out plan.","Avoid exposed ridgelines, open water, high ground.","Postpone outdoor sessions."];
+  return {sev:risk, label:labels[risk], note:notes[risk]};
+}
+function classifyWind(gustKmh){
+  if(gustKmh<30) return {sev:0, label:"Calm", note:"No effect on most sports."};
+  if(gustKmh<50) return {sev:1, label:"Breezy", note:"Noticeable on bike/paddle; fine for running."};
+  if(gustKmh<70) return {sev:2, label:"Strong", note:"Caution on bikes, boats, exposed trails."};
+  if(gustKmh<90) return {sev:3, label:"Very strong", note:"Avoid cycling, open water, forests (falling branches)."};
+  return {sev:4, label:"Damaging", note:"Stay indoors."};
+}
+function classifyPollen(v){
+  if(v==null) return {sev:0, label:"n/a"};
+  if(v<10) return {sev:0, label:"Low"};
+  if(v<30) return {sev:1, label:"Moderate"};
+  if(v<70) return {sev:2, label:"High"};
+  return {sev:3, label:"Very high"};
+}
+
+const SEV_LABEL = ["Good conditions","Moderate caution","Elevated caution","High caution","Postpone / go indoors"];
+const SEV_DESC = [
+  "All monitored factors are in a comfortable range for outdoor training.",
+  "At least one factor needs mild adjustment &mdash; pacing, hydration or timing.",
+  "One or more factors call for real changes to session plan.",
+  "Multiple factors are stacking up; shorten, delay or relocate the session.",
+  "Conditions carry real acute risk. Move indoors or postpone."
+];
+function sevColor(sev){ return ["#3E7A4C","#B8862A","#C0602A","#AE3730","#2A2130"][sev]; }
+
+let map, marker;
+let state = { fc:null, aq:null, label:null, nowIdx:0, offset:0 };
+let gridState = { cells:null, rects:[], layer:null, nowIdxUTC:0 };
+
+function initMap(lat, lon){
+  map = L.map('map', {zoomControl:true}).setView([lat, lon], 8);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18, attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  marker = L.marker([lat, lon]).addTo(map);
+  gridState.layer = L.layerGroup().addTo(map);
+  map.on('click', async (e)=>{
+    const {lat, lng} = e.latlng;
+    marker.setLatLng([lat, lng]);
+    let label = `${lat.toFixed(3)}, ${lng.toFixed(3)}`;
+    try{
+      const r = await fetch(`${REV_BASE}?lat=${lat}&lon=${lng}&format=json&zoom=10`, {headers:{'Accept':'application/json'}});
+      if(r.ok){
+        const j = await r.json();
+        const a = j.address || {};
+        const name = a.city || a.town || a.village || a.municipality || a.county;
+        if(name) label = [name, a.country].filter(Boolean).join(", ");
+      }
+    }catch(e){}
+    loadLocation(lat, lng, label);
+  });
+}
+
+async function geocode(name){
+  const r = await fetch(`${GEO_BASE}?name=${encodeURIComponent(name)}&count=5&language=en&format=json`);
+  const j = await r.json();
+  return j.results || [];
+}
+
+async function loadLocation(lat, lon, label){
+  const content = document.getElementById('content');
+  content.innerHTML = '<div class="loading">Fetching live data&hellip;</div>';
+  try{
+    const fcUrl = `${FC_BASE}?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m,precipitation_probability,cape,uv_index&past_days=2&forecast_days=3&timezone=auto`;
+    const aqUrl = `${AQ_BASE}?latitude=${lat}&longitude=${lon}&hourly=european_aqi,pm2_5,pm10,ozone,nitrogen_dioxide,uv_index,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&past_days=2&forecast_days=3&timezone=auto`;
+    const [fcRes, aqRes] = await Promise.all([fetch(fcUrl), fetch(aqUrl)]);
+    if(!fcRes.ok || !aqRes.ok) throw new Error("API request failed");
+    const fc = await fcRes.json();
+    const aq = await aqRes.json();
+    const nowIdx = nearestHourIndex(fc.hourly.time);
+    state = { fc, aq, label, nowIdx, offset:0 };
+    if(map){ map.setView([lat, lon], map.getZoom()); marker.setLatLng([lat, lon]); }
+    renderAll();
+  }catch(err){
+    content.innerHTML = `<div class="errbox">Could not load live data (${err.message}). Try a different location or reload.</div>`;
+  }
+}
+
+function nearestHourIndex(times){
+  const now = Date.now();
+  let best=0, bestDiff=Infinity;
+  times.forEach((t,i)=>{
+    const diff = Math.abs(new Date(t).getTime()-now);
+    if(diff<bestDiff){bestDiff=diff; best=i;}
+  });
+  return best;
+}
+
+function severityAt(fc, aq, i){
+  const ti=fc.hourly.temperature_2m[i], rhi=fc.hourly.relative_humidity_2m[i];
+  const gi=fc.hourly.wind_gusts_10m[i], capei=fc.hourly.cape[i], ppi=fc.hourly.precipitation_probability[i];
+  const uvi=fc.hourly.uv_index[i], eaqii=aq.hourly.european_aqi[i];
+  const hHeat = classifyWBGT(computeWBGT(ti, rhi)).sev;
+  const hCold = classifyWindChill(computeWindChill(ti, fc.hourly.wind_speed_10m[i])).sev;
+  const hAir = classifyEAQI(eaqii).sev;
+  const hSun = classifyUV(uvi).sev;
+  const hStorm = classifyThunder(capei, ppi).sev;
+  const hWind = classifyWind(gi).sev;
+  return Math.max(hHeat,hCold,hAir,hSun,hStorm,hWind);
+}
+
+function renderAll(){
+  const {fc, aq, label, nowIdx, offset} = state;
+  const idx = Math.max(0, Math.min(fc.hourly.time.length-1, nowIdx+offset));
+
+  const t = fc.hourly.temperature_2m[idx];
+  const rh = fc.hourly.relative_humidity_2m[idx];
+  const wind = fc.hourly.wind_speed_10m[idx];
+  const gust = fc.hourly.wind_gusts_10m[idx];
+  const cape = fc.hourly.cape[idx];
+  const precipProb = fc.hourly.precipitation_probability[idx];
+  const uv = fc.hourly.uv_index[idx];
+  const eaqi = aq.hourly.european_aqi[idx];
+  const pollenSpecies = {grass:aq.hourly.grass_pollen, birch:aq.hourly.birch_pollen, alder:aq.hourly.alder_pollen, mugwort:aq.hourly.mugwort_pollen, olive:aq.hourly.olive_pollen, ragweed:aq.hourly.ragweed_pollen};
+  let maxPollen = {val:0, name:null};
+  Object.keys(pollenSpecies).forEach(k=>{
+    const v = pollenSpecies[k][idx];
+    if(v!=null && v>maxPollen.val){maxPollen={val:v, name:k};}
+  });
+
+  const wbgt = computeWBGT(t, rh);
+  const heat = classifyWBGT(wbgt);
+  const wc = computeWindChill(t, wind);
+  const cold = classifyWindChill(wc);
+  const air = classifyEAQI(eaqi);
+  const sun = classifyUV(uv);
+  const storm = classifyThunder(cape, precipProb);
+  const windCat = classifyWind(gust);
+  const pollen = classifyPollen(maxPollen.val);
+  const overallSev = Math.max(heat.sev, cold.sev, air.sev, sun.sev, storm.sev, windCat.sev);
+
+  const cards = [
+    {name:"Heat stress (est. WBGT)", reading:wbgt.toFixed(1), unit:"&deg;C", cat:heat},
+    {name:"Wind chill", reading: wc===null ? "&mdash;" : Math.round(wc), unit: wc===null? "" : "&deg;C", cat:cold},
+    {name:"Air quality (EAQI)", reading:eaqi!=null?Math.round(eaqi):"&mdash;", unit:"", cat:air},
+    {name:"UV index", reading:uv!=null?uv.toFixed(1):"&mdash;", unit:"", cat:sun},
+    {name:"Thunderstorm risk", reading:Math.round(cape), unit:"J/kg CAPE", cat:storm},
+    {name:"Wind gusts", reading:Math.round(gust), unit:"km/h", cat:windCat},
+    {name:"Pollen ("+(maxPollen.name||"n/a")+")", reading:maxPollen.val?Math.round(maxPollen.val):"&mdash;", unit:"gr/m&sup3;", cat:pollen},
+    {name:"Humidity", reading:Math.round(rh), unit:"%", cat:{sev:0,label:rh>85?"High":"Normal",note:rh>85?"Sweat evaporation is impaired; heat feels worse.":"No independent effect."}}
+  ];
+  const cardsHtml = cards.map(c=>`
+    <div class="card" style="border-left-color:${sevColor(c.cat.sev)}">
+      <div class="name">${c.name}</div>
+      <div class="reading">${c.reading} <span class="unit">${c.unit}</span></div>
+      <div class="status g${c.cat.sev}">${c.cat.label}</div>
+      <div class="note">${c.cat.note||''}</div>
+    </div>`).join('');
+
+  const windowStart = Math.max(0, nowIdx-24);
+  const windowEnd = Math.min(fc.hourly.time.length-1, nowIdx+24);
+  let stripHtml = '';
+  for(let i=windowStart; i<=windowEnd; i++){
+    const sev = severityAt(fc, aq, i);
+    const dt = new Date(fc.hourly.time[i]);
+    const isNow = i===nowIdx;
+    const isSel = i===idx;
+    const showLabel = (i-windowStart)%4===0;
+    stripHtml += `<div class="strip-hr fill${sev} ${isNow?'now':''} ${isSel?'selected':''}" data-i="${i}" style="opacity:${0.55+sev*0.11}">${showLabel?`<span class="tt">${dt.getHours()}:00</span>`:''}</div>`;
+  }
+
+  const selDate = new Date(fc.hourly.time[idx]);
+  const dayLabel = selDate.toLocaleDateString([], {weekday:'short', day:'numeric', month:'short'});
+  const timeLabel = selDate.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  const offsetLabel = offset===0 ? 'now' : (offset>0 ? `+${offset}h` : `${offset}h`);
+
+  document.getElementById('content').innerHTML = `
+    <div class="flagbar">
+      <div class="flag fill${overallSev}"></div>
+      <div class="flag-status">
+        <div class="label">${label}</div>
+        <div class="value">${SEV_LABEL[overallSev]}</div>
+        <div class="desc">${SEV_DESC[overallSev]}</div>
+      </div>
+      <div class="updated">${dayLabel}<br>${timeLabel}</div>
+    </div>
+
+    <div class="timepanel">
+      <div class="timepanel-top">
+        <span class="lbl">Time (${offsetLabel})</span>
+        <span class="val">${dayLabel}, ${timeLabel}</span>
+      </div>
+      <input type="range" id="timeSlider" min="${windowStart-nowIdx}" max="${windowEnd-nowIdx}" step="1" value="${offset}">
+      <div class="timepanel-buttons">
+        <button class="ghost" id="btnPast24">&minus;24h</button>
+        <button class="ghost" id="btnNow">Now</button>
+        <button class="ghost" id="btnFuture24">+24h</button>
+      </div>
+    </div>
+
+    <div class="grid">${cardsHtml}</div>
+
+    <div class="strip-section">
+      <div class="strip-title"><span>Overall risk, &minus;24h to +24h</span><span>local time</span></div>
+      <div class="strip" id="stripEl">${stripHtml}</div>
+      <div class="strip-legend">
+        <span><span class="legend-sw fill0"></span>Good</span>
+        <span><span class="legend-sw fill1"></span>Moderate</span>
+        <span><span class="legend-sw fill2"></span>Elevated</span>
+        <span><span class="legend-sw fill3"></span>High</span>
+        <span><span class="legend-sw fill4"></span>Postpone</span>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('timeSlider').addEventListener('input', (e)=>{
+    state.offset = parseInt(e.target.value, 10);
+    renderAll();
+    recolorGrid();
+  });
+  document.getElementById('btnPast24').addEventListener('click', ()=>{ state.offset=-24; renderAll(); recolorGrid(); });
+  document.getElementById('btnNow').addEventListener('click', ()=>{ state.offset=0; renderAll(); recolorGrid(); });
+  document.getElementById('btnFuture24').addEventListener('click', ()=>{ state.offset=24; renderAll(); recolorGrid(); });
+  document.getElementById('stripEl').addEventListener('click', (e)=>{
+    const cell = e.target.closest('.strip-hr');
+    if(!cell) return;
+    const i = parseInt(cell.dataset.i, 10);
+    state.offset = i - state.nowIdx;
+    renderAll();
+    recolorGrid();
+  });
+}
+
+async function scanArea(){
+  const n = parseInt(document.getElementById('gridDensity').value, 10);
+  const statusEl = document.getElementById('scanStatus');
+  const scanBtn = document.getElementById('scanBtn');
+  scanBtn.disabled = true;
+  statusEl.textContent = `Scanning ${n}\u00d7${n} grid\u2026`;
+
+  const bounds = map.getBounds();
+  const south = bounds.getSouth(), north = bounds.getNorth();
+  const west = bounds.getWest(), east = bounds.getEast();
+  const cellLat = (north-south)/n, cellLon = (east-west)/n;
+
+  const cells = [];
+  for(let i=0;i<n;i++){
+    for(let j=0;j<n;j++){
+      const cs = south+i*cellLat, cn = cs+cellLat;
+      const cw = west+j*cellLon, ce = cw+cellLon;
+      cells.push({
+        bounds: [[cs,cw],[cn,ce]],
+        lat: (cs+cn)/2,
+        lon: (cw+ce)/2
+      });
+    }
+  }
+
+  try{
+    const latList = cells.map(c=>c.lat.toFixed(4)).join(',');
+    const lonList = cells.map(c=>c.lon.toFixed(4)).join(',');
+    const fcUrl = `${FC_BASE}?latitude=${latList}&longitude=${lonList}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m,precipitation_probability,cape,uv_index&past_days=1&forecast_days=2&timezone=UTC`;
+    const aqUrl = `${AQ_BASE}?latitude=${latList}&longitude=${lonList}&hourly=european_aqi&past_days=1&forecast_days=2&timezone=UTC`;
+    const [fcRes, aqRes] = await Promise.all([fetch(fcUrl), fetch(aqUrl)]);
+    if(!fcRes.ok || !aqRes.ok) throw new Error("grid request failed");
+    const fcArr = await fcRes.json();
+    const aqArr = await aqRes.json();
+    const fcList = Array.isArray(fcArr) ? fcArr : [fcArr];
+    const aqList = Array.isArray(aqArr) ? aqArr : [aqArr];
+
+    const nowIdxUTC = nearestHourIndex(fcList[0].hourly.time);
+    gridState = { cells, fcList, aqList, nowIdxUTC, layer: gridState.layer };
+    gridState.layer.clearLayers();
+    cells.forEach((cell, i)=>{
+      const rect = L.rectangle(cell.bounds, {
+        stroke:false, fillOpacity:0.42, fillColor:'#888'
+      }).addTo(gridState.layer);
+      cell.rect = rect;
+    });
+    recolorGrid();
+    statusEl.textContent = `Scanned ${n}\u00d7${n} = ${n*n} points`;
+  }catch(err){
+    statusEl.textContent = `Scan failed: ${err.message}`;
+  }finally{
+    scanBtn.disabled = false;
+  }
+}
+
+function recolorGrid(){
+  if(!gridState.cells || !gridState.fcList) return;
+  const offset = state.offset || 0;
+  const idx = Math.max(0, Math.min(gridState.fcList[0].hourly.time.length-1, gridState.nowIdxUTC + offset));
+  gridState.cells.forEach((cell, i)=>{
+    const fcPoint = gridState.fcList[i];
+    const aqPoint = gridState.aqList[i];
+    if(!fcPoint || !aqPoint || !cell.rect) return;
+    const sev = severityAt(fcPoint, aqPoint, idx);
+    cell.rect.setStyle({ fillColor: sevColor(sev) });
+  });
+}
+
+function clearGrid(){
+  gridState.layer.clearLayers();
+  gridState.cells = null;
+  gridState.fcList = null;
+  document.getElementById('scanStatus').textContent = '';
+}
+
+document.getElementById('searchBtn').addEventListener('click', async ()=>{
+  const q = document.getElementById('locInput').value.trim();
+  if(!q) return;
+  const results = await geocode(q);
+  if(results.length===0){
+    document.getElementById('content').innerHTML = '<div class="errbox">No matching location found.</div>';
+    return;
+  }
+  const top = results[0];
+  const label = [top.name, top.admin1, top.country].filter(Boolean).join(", ");
+  loadLocation(top.latitude, top.longitude, label);
+});
+document.getElementById('locInput').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter') document.getElementById('searchBtn').click();
+});
+document.getElementById('scanBtn').addEventListener('click', scanArea);
+document.getElementById('clearBtn').addEventListener('click', clearGrid);
+
+initMap(50.3136, 11.9184);
+loadLocation(50.3136, 11.9184, "Hof, Bavaria, Germany");
+</script>
+</body>
+</html>
