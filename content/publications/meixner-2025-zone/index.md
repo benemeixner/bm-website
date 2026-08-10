@@ -7,7 +7,7 @@ authors:
 - Hans-Christer Holmberg
 - Billy Sperlich
 date: '2025-01-01'
-publishDate: '2026-08-03T10:00:17.443128Z'
+publishDate: '2026-08-10T07:55:30.424199Z'
 publication_types:
 - article-journal
 publication: '*Translational Sports Medicine*'
