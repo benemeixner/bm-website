@@ -6,7 +6,7 @@ authors:
 - Manuel Matzka
 - Billy Sperlich
 date: '2025-01-01'
-publishDate: '2026-08-17T07:08:44.474979Z'
+publishDate: '2026-08-24T07:12:03.972041Z'
 publication_types:
 - article-journal
 publication: '*Applied Physiology, Nutrition, and Metabolism*'

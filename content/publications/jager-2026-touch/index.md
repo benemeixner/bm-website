@@ -8,7 +8,7 @@ authors:
 - Benedikt Meixner
 - Matthias Lochmann
 date: '2026-01-01'
-publishDate: '2026-08-17T07:08:44.415116Z'
+publishDate: '2026-08-24T07:12:03.932198Z'
 publication_types:
 - article-journal
 publication: '*International Journal of Sports Science &amp; Coaching*'
