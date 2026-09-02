@@ -5,7 +5,7 @@ authors:
 - Benedikt Meixner
 - Marcelle Schaffarczyk
 - Billy Sperlich
-date: '2026-01-01'
+date: '2026-02-01'
 publishDate: '2026-08-31T13:25:54.751963Z'
 publication_types:
 - article-journal

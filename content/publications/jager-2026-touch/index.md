@@ -7,7 +7,7 @@ authors:
 - Steve Barrett
 - Benedikt Meixner
 - Matthias Lochmann
-date: '2026-01-01'
+date: '2026-06-01'
 publishDate: '2026-08-31T13:25:54.732507Z'
 publication_types:
 - article-journal

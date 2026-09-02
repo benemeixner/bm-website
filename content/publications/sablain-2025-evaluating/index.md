@@ -8,7 +8,7 @@ authors:
 - Kevin Caen
 - Kobe Vermeire
 - Jan Boone
-date: '2025-01-01'
+date: '2025-08-01'
 publishDate: '2026-08-31T13:25:54.784581Z'
 publication_types:
 - article-journal

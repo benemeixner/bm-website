@@ -5,7 +5,7 @@ authors:
 - Benedikt Meixner
 - Mascha Lenk
 - Billy Sperlich
-date: '2026-01-01'
+date: '2026-03-01'
 publishDate: '2026-08-31T13:25:54.745538Z'
 publication_types:
 - article-journal
