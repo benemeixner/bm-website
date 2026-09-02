@@ -33,7 +33,7 @@ affiliations:
 
 links:
   - icon: envelope
-    url: mailto:benedikt.meixner@fau.de # TODO: swap for forwarding address once set up
+    url: mailto:benedikt.meixner@unibw.de
     label: Email
   - icon: brands/bluesky
     url: https://bsky.app/profile/benemeixner.bsky.social

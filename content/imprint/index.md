@@ -15,7 +15,7 @@ sections:
         97082 Würzburg  
         Deutschland
 
-        benedikt.meixner@fau.de
+        benedikt.meixner@unibw.de
 
         ---
 
