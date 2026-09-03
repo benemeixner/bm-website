@@ -24,12 +24,9 @@ bio: |
     composition and scaling, as well as  the use of 
     AI tools in research and sport education.
 
-# TODO: keep this list current as your affiliation changes
 affiliations:
-  - name: FAU Erlangen-Nürnberg, Department of Sport Science
-    url: https://www.sport.fau.de/person/benedikt-meixner/
-  - name: Julius-Maximilians-Universität Würzburg, Integrative & Experimental Exercise Science & Training 
-    url: https://www.sportwissenschaft.uni-wuerzburg.de/team/meixnerbenedikt/
+  - name: Universität der Bundeswehr München
+    url: https://www.unibw.de
 
 links:
   - icon: envelope
@@ -79,18 +76,26 @@ education:
     end: '2015'
 
 
-# TODO: adjust start dates / wording as needed
 experience:
   - role: Research Associate
+    org: Universität der Bundeswehr München
+    start: '2025-10-01'
+    summary: |
+      Research on exercise physiology, focusing on lactate dynamics,
+      NIRS/CPET-based performance diagnostics, and performance repeatability
+      across endurance and high-intensity sports.
+  - role: Research Associate
     org: Julius-Maximilians-Universität Würzburg — Chair of Integrative and Experimental Training and Movement Science (Sperlich Lab)
-    start: '2024-12-01' # TODO: adjust
+    start: '2024-12-01'
+    end: '2025-09-30'
     summary: |
       Research on exercise physiology, focusing on lactate dynamics,
       NIRS/CPET-based performance diagnostics, and performance repeatability
       across endurance and high-intensity sports.
   - role: Lecturer
     org: FAU Erlangen-Nürnberg — Department of Sport Science
-    start: '2022-09-15' # TODO: adjust
+    start: '2022-09-15'
+    end: '2025-09-30'
     summary: |
       Teaching in sport and movement science, including statistics for sport
       science students, with a focus on Lehramt Sport (teacher training).

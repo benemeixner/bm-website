@@ -95,8 +95,8 @@ sections:
       title: 'Teaching'
       subtitle: ''
       text: |-
-        I teach in sport and movement science at FAU Erlangen-Nürnberg, with a
-        focus on Lehramt Sport (PE teacher training). There, I focus on Basketball and
+        I teach in sport and movement science at the Universität der Bundeswehr München,
+        with a focus on Lehramt Sport (PE teacher training). There, I focus on Basketball and
         try to share my love for the game. I also teach other subjects, most notably small games and
         how they’re used for understanding rules.
 
