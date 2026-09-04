@@ -95,15 +95,13 @@ sections:
       title: 'Teaching'
       subtitle: ''
       text: |-
-        I teach in sport and movement science at the Universität der Bundeswehr München,
-        with a focus on Lehramt Sport (PE teacher training). There, I focus on Basketball and
-        try to share my love for the game. I also teach other subjects, most notably small games and
-        how they’re used for understanding rules.
-
-        My research associate position includes a
-        university statistics course built around a flipped-classroom model,
-        and an ongoing interest in how AI tools — used thoughtfully — can
-        support both PE teaching and the way students learn to work with data.
+        My teaching experience spans sport pedagogy and research methods.
+        At FAU Erlangen-Nürnberg I focused on Lehramt Sport — PE teacher training,
+        ball games (especially basketball), and small-sided games as a tool for
+        teaching rules and movement concepts.
+        At the Julius-Maximilians-Universität Würzburg I taught data analysis and
+        interpretation for sport scientists, with an interest in how AI tools —
+        used thoughtfully — can support the way students learn to work with data.
     design:
       columns: '1'
 
