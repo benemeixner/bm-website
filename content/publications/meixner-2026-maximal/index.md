@@ -5,8 +5,8 @@ authors:
 - Benedikt Meixner
 - Peter Leo
 - Billy Sperlich
-date: '2026-06-01'
-publishDate: '2026-08-31T13:25:54.725947Z'
+date: '2026-09-01'
+publishDate: '2026-09-07T12:14:23.760890Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'
