@@ -9,7 +9,7 @@ authors:
 - Jan Boone
 - Billy Sperlich
 date: '2024-05-01'
-publishDate: '2026-09-21T12:36:24.572074Z'
+publishDate: '2026-09-28T13:36:45.152009Z'
 publication_types:
 - article-journal
 publication: '*Physiological Reports*'
