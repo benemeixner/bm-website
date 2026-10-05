@@ -56,6 +56,10 @@ sections:
         ### Sex differences, body composition & scaling
 
         I am interested in how sex differences, body composition, and scaling approaches shape the interpretation of physiological and performance data. This includes questions about when variables should be expressed relative to body mass, fat-free mass, or alternative scaling models, and how these decisions influence comparisons between athletes, groups, and sexes.
+
+        ### Collaborative networks
+
+        I am a member of the [Exercise Prescription Methodology (EPM) Consortium](https://epmconsortium.org), an international collaboration of early-career researchers working to improve how exercise is assessed, prescribed, studied, and reported.
     design:
       columns: '1'
 
