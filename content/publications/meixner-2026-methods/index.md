@@ -6,7 +6,7 @@ authors:
 - Marcelle Schaffarczyk
 - Billy Sperlich
 date: '2026-02-01'
-publishDate: '2026-09-28T13:36:45.070580Z'
+publishDate: '2026-10-05T14:20:45.622726Z'
 publication_types:
 - article-journal
 publication: '*American Journal of Physiology-Regulatory, Integrative and Comparative
