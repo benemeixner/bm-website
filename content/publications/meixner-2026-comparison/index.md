@@ -10,7 +10,7 @@ authors:
 - Billy Sperlich
 - Peter Düking
 date: '2026-03-01'
-publishDate: '2026-10-05T14:20:45.627295Z'
+publishDate: '2026-10-12T15:08:18.640826Z'
 publication_types:
 - article-journal
 publication: '*Frontiers in Education*'
