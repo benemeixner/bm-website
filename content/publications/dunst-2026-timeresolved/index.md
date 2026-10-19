@@ -5,7 +5,7 @@ authors:
 - Katharina Dunst
 - Benedikt Meixner
 date: '2026-08-01'
-publishDate: '2026-10-12T15:08:18.611026Z'
+publishDate: '2026-10-19T12:51:20.617674Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'
