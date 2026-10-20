@@ -41,14 +41,14 @@
   display: none !important;
 }
 
-/* Remove top padding on the very first section so it sits close to the navbar */
+/* Small breathing room between navbar and first section */
 .hbb-section:first-of-type {
-  padding-top: 0 !important;
+  padding-top: 1.5rem !important;
 }
 
-/* The bio block has hardcoded xl:py-32 (8rem!) — override to something tight */
+/* The bio block has hardcoded xl:py-32 (8rem!) — override to something comfortable */
 .resume-biography {
-  padding-top: 0.5rem !important;
+  padding-top: 1rem !important;
   padding-bottom: 2rem !important;
 }
 
