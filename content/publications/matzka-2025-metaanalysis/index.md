@@ -7,7 +7,7 @@ authors:
 - Benedikt Meixner
 - Billy Sperlich
 date: '2025-10-01'
-publishDate: '2026-10-19T12:51:20.670732Z'
+publishDate: '2026-10-26T12:43:40.346079Z'
 publication_types:
 - article-journal
 publication: '*Physiological Reports*'

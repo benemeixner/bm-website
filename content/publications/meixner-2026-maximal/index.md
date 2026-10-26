@@ -6,7 +6,7 @@ authors:
 - Peter Leo
 - Billy Sperlich
 date: '2026-09-01'
-publishDate: '2026-10-19T12:51:20.608360Z'
+publishDate: '2026-10-26T12:43:40.312275Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'
