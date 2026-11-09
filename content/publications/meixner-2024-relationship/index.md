@@ -9,7 +9,7 @@ authors:
 - Jan Boone
 - Billy Sperlich
 date: '2024-11-01'
-publishDate: '2026-11-02T15:29:49.763594Z'
+publishDate: '2026-11-09T15:55:57.094277Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'

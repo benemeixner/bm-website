@@ -6,7 +6,7 @@ authors:
 - Mascha Lenk
 - Billy Sperlich
 date: '2026-03-01'
-publishDate: '2026-11-02T15:29:49.717050Z'
+publishDate: '2026-11-09T15:55:57.032434Z'
 publication_types:
 - article-journal
 publication: '*FASEB BioAdvances*'
