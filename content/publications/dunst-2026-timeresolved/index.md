@@ -4,8 +4,8 @@ title: Time-resolved energy-share reconstruction of individual glycolytic flux k
 authors:
 - Katharina Dunst
 - Benedikt Meixner
-date: '2026-08-01'
-publishDate: '2026-11-09T15:55:57.007367Z'
+date: '2026-11-01'
+publishDate: '2026-11-16T15:30:39.801357Z'
 publication_types:
 - article-journal
 publication: '*European Journal of Applied Physiology*'
