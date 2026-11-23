@@ -8,7 +8,7 @@ authors:
 - Marcelle Schaffarczyk
 - Billy Sperlich
 date: '2026-10-01'
-publishDate: '2026-11-16T15:30:39.809809Z'
+publishDate: '2026-11-23T17:53:27.453774Z'
 publication_types:
 - article-journal
 publication: '*Frontiers in Sports and Active Living*'
