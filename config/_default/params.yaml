@@ -127,7 +127,7 @@ hugoblox:
   # ────────────────────────────────────────────────────────────────────────────
   seo:
     # Browser tab title override (defaults to identity.name if not set)
-    title: ""
+    title: "Benedikt Meixner — Exercise Physiology"
     # For local_business identity type only
     location:
       address:

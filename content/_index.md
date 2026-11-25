@@ -39,8 +39,6 @@ sections:
       title: 'Research'
       subtitle: ''
       text: |-
-        ![Research wordcloud](media/wordcloud.png)
-
         ### Exercise physiology & human performance
 
         My work examines the physiological factors that shape human performance across sprint and endurance contexts. I am particularly interested in how metabolic, cardiopulmonary, muscular, and contextual factors interact to determine what athletes can produce, sustain, and repeat.
@@ -60,6 +58,8 @@ sections:
         ### Collaborative networks
 
         I am a member of the [Exercise Prescription Methodology (EPM) Consortium](https://epmconsortium.org), an international collaboration of early-career researchers working to improve how exercise is assessed, prescribed, studied, and reported.
+
+        ![Research wordcloud](media/wordcloud.png)
     design:
       columns: '1'
 
@@ -142,9 +142,11 @@ sections:
       title: '✉️ Contact'
       subtitle: ''
       text: |-
-        The best way to reach me is by email — see the links at the top of
-        this page for email and social/academic profiles (ORCID,
-        ResearchGate, Bluesky).
+        The best way to reach me is by [email](mailto:benedikt.meixner@unibw.de).
+        You can also find me on [ORCID](https://orcid.org/0000-0001-7044-9426),
+        [ResearchGate](https://www.researchgate.net/profile/Benedikt-Meixner),
+        [Google Scholar](https://scholar.google.com/citations?user=T3OFN84AAAAJ),
+        and [Bluesky](https://bsky.app/profile/benemeixner.bsky.social).
 
         I'm always happy to hear from potential collaborators, students, or
         journalists working on topics related to exercise physiology,

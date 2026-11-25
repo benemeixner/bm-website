@@ -112,12 +112,14 @@ h2.section-heading, h1.section-heading {
   font-weight: 400 !important;
 }
 
-/* Body text slightly smaller */
+/* Body text */
 body {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 .prose {
-  font-size: 0.9rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
 }
 
 /* Tag chips / interest pills — orange accent */
@@ -155,4 +157,15 @@ body {
 /* Wordcloud: transparent bg adapts to dark mode via invert */
 .dark img[src*="wordcloud"] {
   filter: invert(1);
+}
+
+/* Bio sub-section labels (ABOUT / EDUCATION / RESEARCH INTERESTS) — slightly more visible */
+.resume-biography p[class*="tracking-widest"] {
+  color: #6b7280 !important;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 0.5rem;
+}
+.dark .resume-biography p[class*="tracking-widest"] {
+  color: #9ca3af !important;
+  border-left-color: #374151;
 }
